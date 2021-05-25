@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title >Title</title>
+</head>
+<body>
+    <h1>{{ product.name }}</h1>
+<!--    <image src="{% if question.question_image %}-->
+<!--                        {{ question.question_image.url }}-->
+<!--                 {% endif %}">-->
+<!--    </image>-->
+
+
+        <image src="{% if product.image %}
+                        {{ product.image.url }}
+                 {% else %}
+                     {% static 'product/no_image.png' %}
+                 {% endif %}">
+    </image><br>
+
+    {{product.description}} <br>
+    ${{product.price}} <br>
+
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+</body>
+</html>
