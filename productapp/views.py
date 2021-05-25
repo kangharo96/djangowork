@@ -5,10 +5,13 @@ from productapp.models import Product
 
 
 # Create your views here.
-def product(request):
-    return HttpResponse('You have reached the products page')
-
-
 def index(request):
-    return HttpResponse('You have reached the index')
+    latest_products = Product.objects.all()
+    context = {'latest_products': latest_products}
+    return render(request, 'productapp/index.html', context)
+
+
+def detail(request, product_id):
+    product_item = get_object_or_404(Product, pk=product_id)
+    return render(request, 'productapp/detail.html', {'product': product_item})
 
