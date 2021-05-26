@@ -4,10 +4,14 @@
 {% block title %}Product List{% endblock title %}
 
 {% block content %}
+    <a href="{% url 'productapp:product_new' %}">Create new product</a>
     {% if products %}
         <table>
         {% for product in products %}
-            <tr><td><a href="{% url 'productapp:product_detail' product.id %}">{{ product.name }}</a></td>
+            <tr>
+                <td><a href="{% url 'productapp:product_detail' product.id %}">{{ product.name }}</a></td>
+                <td><a href="{% url 'productapp:product_edit' product.id %}">Edit</a></td>
+                <td><a href="{% url 'productapp:product_delete' product.id %}">Delete</a></td>
             </tr>
         {% endfor %}
         </table>

@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>{{ product.name }}</h1>
+    {{ product.image }} <br>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {{ product.category }} <br>
     {{ product.description }} <br>
