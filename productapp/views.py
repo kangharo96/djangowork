@@ -3,15 +3,29 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from productapp.models import Product
 
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
 
 # Create your views here.
-def index(request):
-    latest_products = Product.objects.all()
-    context = {'latest_products': latest_products}
-    return render(request, 'productapp/index.html', context)
+class ProductList(ListView):
+    # latest_products = Product.objects.all()
+    # context = {'latest_products': latest_products}
+    # return render(request, 'productapp/index.html', context)
+    template_name = 'productapp/product_list.html'
+    model = Product
+    context_object_name = 'products'
 
 
-def detail(request, product_id):
-    product_item = get_object_or_404(Product, pk=product_id)
-    return render(request, 'productapp/detail.html', {'product': product_item})
+class ProductDetail(DetailView):
+    model = Product
+    template_name = 'productapp/product_detail.html'
+
+
+# def create(request):
+#     pass
+#
+#
+# class ProductDelete(DeleteView):
+#     model = Product
+#     success_url = '/'
 
