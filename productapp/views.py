@@ -1,13 +1,19 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib import auth
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 
-from productapp.models import Product
+from productapp.models import Product, Category
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from productapp.forms import ProductForm
 
 
 # Create your views here.
+class CategoryList(ListView):
+    model = Category
+    pass
+
+
 class ProductList(ListView):
     # latest_products = Product.objects.all()
     # context = {'latest_products': latest_products}
@@ -20,6 +26,7 @@ class ProductList(ListView):
 class ProductDetail(DetailView):
     model = Product
     template_name = 'productapp/product_detail.html'
+    context_object_name = 'product'
 
 
 def product_new(request):
@@ -36,7 +43,7 @@ def product_new(request):
 
 class ProductCreate(CreateView):
     model = Product
-    fields = ['name', 'category', 'description', 'price']
+    fields = ['name', 'category', 'description', 'price', 'image']
     template_name = 'productapp/product_new.html'
     success_url = reverse_lazy('productapp:product_list')
 
